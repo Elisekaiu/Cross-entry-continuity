@@ -4,7 +4,7 @@
 
 > **A small bridge for conversations that happen in different places.** Keep each chat thread independent, while sharing a little recent context whenever it helps the conversation flow.
 
-[Architecture](docs/ARCHITECTURE.md) · [Setup](docs/SETUP.md) · [Other AI platforms](docs/ADAPTERS.md) · [Limitations](docs/LIMITATIONS.md) · [Safety](SECURITY.md) · [Credits](CREDITS.md)
+[Architecture](docs/ARCHITECTURE.md) · [Protocol & state machine](docs/PROTOCOL.md) · [Instructions we use](docs/INSTRUCTIONS.md) · [Setup](docs/SETUP.md) · [Other AI platforms](docs/ADAPTERS.md) · [Safety](SECURITY.md) · [Credits](CREDITS.md)
 
 ## Beyond ChatGPT: useful for AI companionship and multi-agent workflows
 
@@ -73,6 +73,7 @@ Shortcuts carries app open/close signals. The extension reads the conversation *
 - One-shot transitions, bounded waits, job-specific ACK, fail-closed conversation checks and a clear `no_delta` vs `failed` distinction.
 - A separate short checkpoint can preserve critical current progress if the extension fails.
 - Reverse sync tails the other Agent's visible JSONL transcript in ordinary code—no repeated summary-model calls.
+- For a deeper explanation of revisions, ACK timing, pending cursors, terminal failures and reverse byte cursors, see [Protocol & state machine](docs/PROTOCOL.md). For the generalized prompt rules we actually use, see [Instructions](docs/INSTRUCTIONS.md).
 
 ## Runnable minimal reference
 

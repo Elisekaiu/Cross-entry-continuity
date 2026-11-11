@@ -87,3 +87,8 @@ An app-open/close Shortcut reports a surface event. It does **not** read the nat
 ## E. Maintaining browser capture
 
 Web page nodes and private interfaces may change with platform updates. The sample uses a DOM-only capture path for easier reading and adaptation. When customizing it, check site permissions, browser identity, message visibility and upload destinations.
+
+
+## F. Deeper protocol notes
+
+The state machine, ACK-before-cursor-commit rule, `no_delta` vs `failed`, repeated-text edge case and reverse byte cursor are documented in [PROTOCOL.md](PROTOCOL.md).
