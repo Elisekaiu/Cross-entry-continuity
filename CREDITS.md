@@ -13,7 +13,7 @@ These were researched or compared for page structure, visible-message detection,
 - [1nGzo/chatgpt-current-exporter](https://github.com/1nGzo/chatgpt-current-exporter)
 - [Kirito-Elucidator/ChatGPT-Exporter](https://github.com/Kirito-Elucidator/ChatGPT-Exporter)
 
-Check each upstream license before redistributing any of its actual source code. This repository's `examples/` are rewritten general reference snippets, not a repackaged upstream extension.
+When building on upstream code, follow its license and attribution requirements. The `examples/` directory contains our simplified reference snippets.
 
 ## OpenAI product notes
 

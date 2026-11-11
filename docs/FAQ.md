@@ -12,22 +12,22 @@ No general supported route is known. App-close/open automation is a *surface eve
 
 You can, but it adds model calls, latency, token use and potential paraphrase errors. Our design uses ordinary code for cursors, clipping, deduplication and transport, reserving model context for a short factual handoff when actually needed.
 
-**Is this guaranteed to bootstrap in a new Chat?**
+**When will a new Chat read bootstrap and continuity?**
 
-No. Ordinary Chat tool use is best effort and depends on the available tools, instructions and model behavior. A brief manual reminder might be needed. If time gaps matter, host-provided timestamps are more trustworthy than prompting the model to print its own clock.
+You can describe triggers such as a new conversation, an explicit return, or a meaningful time gap in your instructions and tool descriptions. Model-initiated calls may still vary, so a gentle reminder can help. Chat does not always expose reliable per-message timing to the model; setups that already check trustworthy current time each turn, or supply real message timestamps, may detect long returns more consistently.
 
 **Why abandon failures instead of retrying forever?**
 
 We prefer a bounded, visible context miss over wrong conversation injection, indefinite waiting or duplicated context. New genuine activity can start another transition.
 
-**Does the repository contain private memory or conversation content?**
+**Can I connect my own memory system?**
 
-No. It describes concepts and provides generic reference code, not personal long-term memories or production secrets.
+Yes. The examples show separate roles for bootstrap, recall, archive, continuity and checkpoints. Connect those to your own storage and tools; personal conversations and memory data stay in your own environment.
 
 **Will it work with another AI service without a webhook?**
 
-The design may apply, but the ChatGPT DOM extension cannot be presumed compatible. Confirm permitted exports, browser access, terms, Agent hook and storage options. A manual checkpoint is a valid simpler option. See [Adapter guide](ADAPTERS.md).
+The architecture is adaptable. Check the service's permitted export or browser access, then connect your own message parser, hook and short-term storage. A manual checkpoint is a lovely lightweight starting point. See [Adapter guide](ADAPTERS.md).
 
 **Is this only for AI companionship?**
 
-No. Long-term human–AI companionship is one motivating example, but independent work/personal assistants and multi-agent projects can benefit too.
+Not at all. We started with long-term human–AI companionship, but independent project agents, work/personal assistants and multi-device chats can benefit from the same idea.

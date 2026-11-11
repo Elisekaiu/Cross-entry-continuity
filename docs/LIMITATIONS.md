@@ -8,9 +8,9 @@
 | Codex visible rollout JSONL tailing | Used in private setup | Non-model exporter, byte cursor and idempotency; format dependent |
 | Windows/Linux desktop Chromium | Hypothetical, not validated | Verify permissions, extension background lifecycle and login |
 | Edge/Brave/Arc Chromium | Hypothetical, not validated | Verify DOM and extension APIs |
-| Other AI chat website or messaging platform | Architectural possibility only | Requires separate lawful access and adapter, not guaranteed |
+| Other AI chat website or messaging platform | Potential adaptation | Check permitted access and build a platform-specific adapter |
 | Mobile Safari/Chrome running desktop extension on iOS | Unsupported path | Use a desktop device or manual checkpoint |
-| Automatic identification of iOS Chat's latest opened conversation | Unsolved | Never guess from recency; fail closed |
+| Automatic identification of the currently open iOS Chat | Still exploring | Use the verified desktop conversation ID; otherwise leave the handoff empty |
 | Automatic switching of desktop tab after iOS chat switch | Unsolved | Manually open target conversation on desktop |
 | Automatic bootstrap / continuity on a new Chat | Model-triggered | Clear tool descriptions and return-time instructions help; a gentle reminder may still be useful |
 | Long-gap detection via user instructions | Depends on time information | The model may lack per-message timestamps; reliable current-time checks or supplied message times may improve return triggers |

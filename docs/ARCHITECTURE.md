@@ -80,9 +80,9 @@ A source-filtered read avoids feeding a Chat-produced shadow batch back into the
 
 Any MCP/plugin tool layer can expose these concepts. They need not be the same product or database, but their lifecycles and responsibilities should remain separate.
 
-## D. What iOS Shortcuts can and cannot do
+## D. The role of iOS Shortcuts
 
-An app-open/close Shortcut reports a surface event. It does **not** read the native ChatGPT transcript or active conversation ID. Desktop Chrome captures the conversation **actually open in its own tab**, not necessarily the one open on the phone. If identity cannot be proved, fail closed.
+An app-open/close Shortcut reports a surface event. It does **not** read the native ChatGPT transcript or active conversation ID. Desktop Chrome captures the conversation **actually open in its own tab**, not necessarily the one open on the phone. When a matching desktop conversation cannot be confirmed, the capture ends this turn without forwarding messages.
 
 ## E. Maintaining browser capture
 

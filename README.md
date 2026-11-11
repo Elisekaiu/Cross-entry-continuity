@@ -61,7 +61,7 @@ Shortcuts carries app open/close signals. The extension reads the conversation *
 
 1. Two independently functioning chat entrances; at least one lets you attach hooks or access your own transcript in a permitted way.
 2. A long-running desktop Chromium instance authenticated to the chat website, with the **correct conversation open** if using browser capture.
-3. A secure HTTPS/private network bridge under your control and a short-lived store; **never forward ChatGPT session tokens/cookies**.
+3. A secure HTTPS/private network bridge under your control and a short-lived store. Keep ChatGPT session credentials on the browser device.
 4. Stable conversation/message IDs where available, a deduplication cursor, and a consume ACK. A failed transition should terminate, not burn model quotas in an endless loop.
 5. For Chat-side retrieval, a connected tool plus instructions that describe when to bootstrap, read recent context, and leave a checkpoint.
 
