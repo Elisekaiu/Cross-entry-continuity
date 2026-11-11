@@ -1,27 +1,31 @@
-# Credits / Attribution
+# 致谢与来源
 
-## 直接相关的早期启发
+这座小桥是在不断尝试和改进的过程中搭起来的。下面这些开源项目给过我们不少启发，感谢作者们愿意分享自己的作品。
 
-- **[OwlCt/ChatGPT-Export](https://github.com/OwlCt/ChatGPT-Export)** — MIT License；我们早期的逐字原文归档与登录态读取 ChatGPT 对话的研究参考。上游项目本身给 **[huhusmang/ChatGPT-Exporter](https://github.com/huhusmang/ChatGPT-Exporter)** 和更早的 *ChatGPT Universal Exporter* 项目及其贡献者致谢；请尊重这条出处链。其现行 `LICENSE` 声明包括 `Copyright (c) 2026 huhu`。参考项目使用 ChatGPT 网页内部私有接口的方式，而非官方稳定的 Chat Webhook。
+## 最初的聊天导出思路
 
-## 后续技术调研与相似问题空间
+- **[OwlCt/ChatGPT-Export](https://github.com/OwlCt/ChatGPT-Export)**（MIT）——早期研究逐字原文归档和在已登录浏览器环境读取 ChatGPT 对话时的重要参考。它的项目致谢还提到了 **[huhusmang/ChatGPT-Exporter](https://github.com/huhusmang/ChatGPT-Exporter)** 和更早的 *ChatGPT Universal Exporter* 贡献者。感兴趣的读者可以沿着这条来源链继续探索。
 
-下列项目用于研究当前分支捕获、页面观察、DOM 消息 ID、扩展隔离与本地数据导出等问题。这些项目分别提供了有用的参考：
+## 浏览器扩展与当前会话采集
 
-- [dialoguesai/chatgpt-shadow-extension](https://github.com/dialoguesai/chatgpt-shadow-extension) — Chrome MV3、本地存储、页面可见消息与消息身份边界（Apache-2.0）。
-- [jtsternberg/ChatGPT-Export](https://github.com/jtsternberg/ChatGPT-Export) — 当前会话 DOM 导出与稳定结构选择器。
-- [1nGzo/chatgpt-current-exporter](https://github.com/1nGzo/chatgpt-current-exporter) — 当前聊天单会话 JSON / Markdown 导出。
-- [Kirito-Elucidator/ChatGPT-Exporter](https://github.com/Kirito-Elucidator/ChatGPT-Exporter) — 浏览器导出器与 userscript 方案。
+开发期间，我们也阅读、比较过以下项目的页面采集和聊天导出方案：
 
-在对照这些参考时，应以各自仓库实际 `LICENSE` 为准。**不因为某仓库公开可见就认定它可被直接重分发。** 当前 repo 的 `examples/` 是重新写成的独立通用参考，而不是上述仓库打包再分发。
+- [dialoguesai/chatgpt-shadow-extension](https://github.com/dialoguesai/chatgpt-shadow-extension) —— Chrome MV3 扩展、页面消息识别与本地存储。
+- [jtsternberg/ChatGPT-Export](https://github.com/jtsternberg/ChatGPT-Export) —— 当前会话 DOM 导出与结构选择器。
+- [1nGzo/chatgpt-current-exporter](https://github.com/1nGzo/chatgpt-current-exporter) —— 单个聊天的 JSON／Markdown 导出。
+- [Kirito-Elucidator/ChatGPT-Exporter](https://github.com/Kirito-Elucidator/ChatGPT-Exporter) —— 浏览器导出与 userscript 思路。
 
-## OpenAI 产品信息
+如果在自己的版本中直接复用这些项目的源代码，记得阅读上游许可证，保留对应的作者与版权信息。仓库的 `examples/` 则是为介绍这套架构整理的通用参考实现。
 
-- [ChatGPT Scheduled tasks](https://help.openai.com/en/articles/10291617-scheduled-tasks-in-chatgpt)
+## 相关产品说明
+
+- [ChatGPT Scheduled Tasks](https://help.openai.com/en/articles/10291617-scheduled-tasks-in-chatgpt)
 - [ChatGPT Work and Codex](https://help.openai.com/en/articles/20001275-chatgpt-work-and-codex)
 
-这些引用用于准确区分 Work 的「受支持外部应用事件触发任务」与普通 Chat 消息 webhook，并不意味着 OpenAI 对本项目提供支持或背书。
+这两篇资料有助于了解 Work 的定时／外部事件触发，与普通 Chat 逐消息同步需求之间的区别。
 
-## 本项目
+## 关于协作
 
-Concept and reference implementation assembled collaboratively by an independent developer and AI-assisted coding tools (including OpenAI Codex on the private system). Git 提交的 co-author 字段记录 AI 协作情况 or an official OpenAI contribution. See [MIT LICENSE](LICENSE). No private chat transcript, user data, secrets or proprietary connected-app content is included.
+这个项目由独立开发者与 AI 编程工具共同整理，其中 Codex 参与了私人系统的开发。Git 提交中的 co-author 署名记录了这份协作。
+
+项目示例采用 [MIT License](LICENSE)。也谢谢每一位愿意分享适配经验、改进建议的人。
