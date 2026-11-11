@@ -1,6 +1,6 @@
 # Template: Chat-side instructions with connected memory/continuity tools
 
-Replace every example tool name with the actual MCP/plugin actions available to your Chat. A prompt cannot create tools or ensure they are called.
+Replace the example tool names with the MCP/plugin actions connected to your Chat. The wording focuses on natural continuity at new sessions and meaningful returns.
 
 > Keep independent chat entrances as separate sessions sharing *bounded verified context*, not one endless shared transcript.
 >
@@ -12,7 +12,7 @@ Replace every example tool name with the actual MCP/plugin actions available to 
 >
 > When significant current progress would otherwise be lost during an immediate switch, write **one concise** `continuity_write` checkpoint: last decision, ongoing task and next step. Never promote routine chatter or private secrets to long-term memory merely because they appeared in continuity.
 >
-> Require consent/approval for permanent memories where appropriate. Trust only timestamps supplied by the host or tool; don't pretend the LLM has a reliable local clock from instructions alone.
+> Require consent/approval for permanent memories where appropriate. If your environment provides trustworthy current time or message timestamps, check the elapsed time before deciding whether to refresh continuity. Some chat model contexts do not include per-turn timestamps; setups that already verify time before each reply may get more consistent long-return triggers.
 >
 > On a tool failure, do not retry forever. A missed continuity read does not prove that nothing happened elsewhere.
 

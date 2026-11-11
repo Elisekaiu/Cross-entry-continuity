@@ -6,7 +6,7 @@
 
 ## Other public projects studied
 
-These were researched or compared for page structure, visible-message detection, MV3 extension isolation and browser export. **A research link is not a claim that we copied their code.**
+These were researched or compared for page structure, visible-message detection, MV3 extension isolation and browser export. These links record the projects we studied while developing the extension.
 
 - [dialoguesai/chatgpt-shadow-extension](https://github.com/dialoguesai/chatgpt-shadow-extension)
 - [jtsternberg/ChatGPT-Export](https://github.com/jtsternberg/ChatGPT-Export)
@@ -20,8 +20,8 @@ Check each upstream license before redistributing any of its actual source code.
 - [ChatGPT Scheduled Tasks](https://help.openai.com/en/articles/10291617-scheduled-tasks-in-chatgpt)
 - [ChatGPT Work and Codex](https://help.openai.com/en/articles/20001275-chatgpt-work-and-codex)
 
-These links clarify the difference between supported external app event-triggered tasks and ordinary Chat message webhooks. They do not imply official approval.
+These links clarify the difference between supported external app event-triggered tasks and ordinary Chat message webhooks. They help explain the available event-trigger and Chat integration mechanisms.
 
 ## Project authorship
 
-The architecture and reference are a collaboration of an independent developer and AI-assisted tooling, including OpenAI Codex work on the private system. Git co-author attribution discloses assistance, **not an official OpenAI contribution**. No private conversation, account data or memory records are shared here. New reference source uses the included [MIT License](LICENSE).
+The architecture and reference are a collaboration of an independent developer and AI-assisted tooling, including OpenAI Codex work on the private system. Git co-author attribution discloses assistance, a record of AI-assisted development. No private conversation, account data or memory records are shared here. New reference source uses the included [MIT License](LICENSE).

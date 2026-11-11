@@ -1,4 +1,4 @@
-# Verification scope and known limitations
+# Tested setups and areas we're still exploring
 
 | Capability | Status | Practical implication |
 | --- | --- | --- |
@@ -12,9 +12,9 @@
 | Mobile Safari/Chrome running desktop extension on iOS | Unsupported path | Use a desktop device or manual checkpoint |
 | Automatic identification of iOS Chat's latest opened conversation | Unsolved | Never guess from recency; fail closed |
 | Automatic switching of desktop tab after iOS chat switch | Unsolved | Manually open target conversation on desktop |
-| Guaranteed Chat-side bootstrap / continuity tool invocation | Not guaranteed | Prompt/tool descriptions help; manual reminder may be needed |
-| Reliable time gap inferred from LLM itself | Not guaranteed | Host-provided timestamps, not generated time assertions |
+| Automatic bootstrap / continuity on a new Chat | Model-triggered | Clear tool descriptions and return-time instructions help; a gentle reminder may still be useful |
+| Long-gap detection via user instructions | Depends on time information | The model may lack per-message timestamps; reliable current-time checks or supplied message times may improve return triggers |
 | ChatGPT private site APIs / DOM selectors | Unstable | Expect maintenance; avoid claiming official integration |
-| One-click deployment of the private production system | Not provided | Memory server and internal routing are intentionally not public |
+| Building the complete bridge in your own setup | Adapter work required | The sample includes collector, extension, hook and exporter; connect your preferred memory and chat services |
 
-Other failure modes include multiple open tabs, streaming replies, regenerations, branch edits, lazy-loaded long chats, background service-worker sleep, Shortcuts permissions, transient DB loss, stale caches, race conditions and timeout errors. Prefer **a missing handoff over misattributed conversations**.
+Other failure modes include multiple open tabs, streaming replies, regenerations, branch edits, lazy-loaded long chats, background service-worker sleep, Shortcuts permissions, transient DB loss, stale caches, race conditions and timeout errors. When a conversation cannot be identified confidently, the handoff ends quietly and can be tried again after the correct page is open.

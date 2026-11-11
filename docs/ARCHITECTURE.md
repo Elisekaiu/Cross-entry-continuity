@@ -1,6 +1,6 @@
 # Architecture and handoff sequence
 
-This document describes **observed production design**, whereas `examples/` is a generic runnable reference, not a byte-for-byte copy of the private system.
+This page follows the two directions of our working handoff flow. Runnable simplified examples live in `examples/`.
 
 ## A. Chat → independent Agent
 
@@ -40,7 +40,7 @@ sequenceDiagram
  end
 ```
 
-A ready but unconsumed batch can be picked up on a later prompt. Failed handoffs end the current revision; a **new genuine Chat activity** is needed for a new revision. This favors avoiding wrong or duplicated context over perfect completeness.
+An uploaded batch can wait for a later prompt to consume it. A failed handoff ends that transition; fresh Chat activity creates a new one. This keeps the other conversation moving without repeated retries.
 
 ### Example production limits
 
@@ -84,6 +84,6 @@ Any MCP/plugin tool layer can expose these concepts. They need not be the same p
 
 An app-open/close Shortcut reports a surface event. It does **not** read the native ChatGPT transcript or active conversation ID. Desktop Chrome captures the conversation **actually open in its own tab**, not necessarily the one open on the phone. If identity cannot be proved, fail closed.
 
-## E. Safety boundary
+## E. Maintaining browser capture
 
-Private web APIs and DOM selectors may change without notice and can carry ToS/privacy implications. The public extension is DOM-only, intentionally opt-in, and only for one's own permitted messages. Never publish cookies, chats, hidden tool payloads, or personal memory contents.
+Web page nodes and private interfaces may change with platform updates. The sample uses a DOM-only capture path for easier reading and adaptation. When customizing it, check site permissions, browser identity, message visibility and upload destinations.

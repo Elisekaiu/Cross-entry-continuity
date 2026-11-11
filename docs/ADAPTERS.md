@@ -1,15 +1,15 @@
 # Adapting to another AI chat service without a message webhook
 
-The reference design is not branded to one chatbot. It can be useful for long-running personal assistants, human–AI companionship, creative workflows, multiple devices and separate Agent threads. It is **not** a universal cross-platform extension.
+The underlying design can work across long-running personal assistants, human–AI companionship, creative workflows and separate Agent threads. Each platform brings its own available tools and ways to read messages.
 
 | Feature available | What you can build | If absent |
 | --- | --- | --- |
 | Official message event/webhook | Prefer stable documented event integration | Consider permitted export, local transcript or web view |
-| Authorized access to your own conversation history | Source-verified small deltas | Do not scrape blindly; use intentional checkpoints |
+| Access to your own readable chat history | Source-verified short deltas | Start with intentional checkpoints |
 | Long-running desktop browser | Local MV3 extension / browser capture | Use manual exports/shares with lower freshness expectations |
 | Agent prompt hook | Read and inject only when a real user prompt arrives | Offer an explicit user command instead |
 | Agent visible transcript/log | Non-LLM cursor-based reverse export | Use user-exported snippets or checkpoints |
-| Chat-side memory/continuity tool | Bootstrap, recall, archive, continuity_read/write | Manual copy-and-paste is an honest fallback |
+| Chat-side memory/continuity tool | Bootstrap, recall, archive, continuity_read/write | Use a manual note or explicit tool command as a starting point |
 
 **Adoption stages:**
 
@@ -22,4 +22,4 @@ The reference design is not branded to one chatbot. It can be useful for long-ru
 
 **Not tested:** Windows/Linux Chromium, alternate chatbot UIs, other mobile chat apps, non-Codex agents. Their APIs, terms, login sessions and limitations require separate investigation.
 
-For AI companionship, preserving **traceable, bounded context** is more valuable than pretending the model has memories it never received. Short-term continuity expires; permanent memory belongs to a separate reviewed/consented layer.
+For AI companionship, the distinction between **what just happened elsewhere** and **what we want to remember long-term** can make a real difference. Recent context can expire naturally, while important moments move into a separate, reviewed memory system.

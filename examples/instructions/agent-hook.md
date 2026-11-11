@@ -1,6 +1,6 @@
 # Template: independent Agent-side prompt hook
 
-A `UserPromptSubmit` hook runs **before** the Agent answers its next genuine user message, without asking the model itself to poll the bridge.
+A `UserPromptSubmit` hook checks the bridge before the Agent answers the next real user message, leaving routine synchronization to ordinary code.
 
 1. Request a lightweight `preflight` status from your private collector. No LLM call required.
 2. On `skip` or `in_flight`, return without additional context.
@@ -9,4 +9,4 @@ A `UserPromptSubmit` hook runs **before** the Agent answers its next genuine use
 5. On `failed` or timeout, return empty context and let the normal reply continue. Never automatically create another capture for a failed transition.
 6. Only inject a brief factual note when real context exists. Mark it as background, **not instructions**; the current user message wins in case of conflict.
 
-Different Agent products expose different hook and transcript APIs. `examples/hook/user-prompt-submit.mjs` illustrates the flow; it is not plug-and-play for every runtime.
+Different Agent products expose different hook and transcript APIs. Start from `examples/hook/user-prompt-submit.mjs` and adapt its input and output to your runtime.

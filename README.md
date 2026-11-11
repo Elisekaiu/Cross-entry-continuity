@@ -2,15 +2,15 @@
 
 **English branch `english`** · [中文版 main / Full Chinese edition](https://github.com/Elisekaiu/Cross-entry-continuity/tree/main)
 
-> **An architecture write-up and runnable minimal reference** for small, trustworthy, on-demand context handoff between separate AI chat entrances. Not an official ChatGPT Chat webhook, not turnkey iOS conversation mirroring, and not a copy of our private deployment.
+> **A small bridge for conversations that happen in different places.** Keep each chat thread independent, while sharing a little recent context whenever it helps the conversation flow.
 
 [Architecture](docs/ARCHITECTURE.md) · [Setup](docs/SETUP.md) · [Other AI platforms](docs/ADAPTERS.md) · [Limitations](docs/LIMITATIONS.md) · [Safety](SECURITY.md) · [Credits](CREDITS.md)
 
 ## Beyond ChatGPT: useful for AI companionship and multi-agent workflows
 
-The architecture is **platform-agnostic in principle**, not an extension that automatically works on every chatbot. People who spend time with companion AIs across different apps—or use one thread for everyday conversations and another for active projects—may want enough short-term context to resume naturally without collapsing everything into one giant prompt. The same design also suits personal assistants, multi-device conversations, and separate work/life agents.
+The same idea can be adapted to different AI chat services and personal agents. People who spend time with companion AIs across different apps—or use one thread for everyday conversations and another for active projects—may want enough short-term context to resume naturally without collapsing everything into one giant prompt. The same design also suits personal assistants, multi-device conversations, and separate work/life agents.
 
-If another AI platform has no message webhook, check whether it provides a *permitted* export, readable local transcript, or supported browser access. If none exists, use a manual checkpoint and a retrieval tool instead of pretending that a scraper is reliable. **Only the ChatGPT Chat + independent Agent environment below has actually been tested.**
+If another AI platform has no message webhook, check whether it provides a *permitted* export, readable local transcript, or supported browser access. If direct access is unavailable, a short checkpoint and a retrieval tool are already a useful place to start. Our hands-on testing so far covers the ChatGPT Chat + independent Agent setup described below.
 
 ## Why so many pieces?
 
@@ -47,7 +47,7 @@ flowchart LR
     M[(Long-term memory + verbatim archive)] <-->|bootstrap / recall / archive search| A
 ```
 
-**The arrows do not mean Chrome can see the active conversation in the iOS app.** The desktop browser must actually show the intended conversation. Shortcuts only sends surface events, not message text or conversation IDs.
+Shortcuts carries app open/close signals. The extension reads the conversation **actually open on desktop Chrome**, so switching chats on the iPhone currently also requires opening the corresponding desktop page.
 
 ## Our confirmed environment
 
@@ -55,15 +55,15 @@ flowchart LR
 - MacBook with a signed-in Chrome MV3 extension; the real desktop requirement is an **always-on supported Chromium environment**, not a Mac-specific feature. Other OS/browser combinations are plausible but **not verified**.
 - Linux VPS running a Node.js collector, short-term event store and independent Codex/Agent runtime.
 - Agent-side prompt hook with bounded wait, plus a local visible-log reader with byte offsets and idempotent messages.
-- A private memory tool exposing bootstrap, recall, verbatim archive, continuity-read and checkpoint-write capabilities. **These are not all built into ChatGPT by default.**
+- A connected memory tool that provides bootstrap, long-term recall, verbatim archive, short-term continuity and checkpoint writing.
 
-## Minimum requirements
+## What you need to try it
 
 1. Two independently functioning chat entrances; at least one lets you attach hooks or access your own transcript in a permitted way.
 2. A long-running desktop Chromium instance authenticated to the chat website, with the **correct conversation open** if using browser capture.
 3. A secure HTTPS/private network bridge under your control and a short-lived store; **never forward ChatGPT session tokens/cookies**.
 4. Stable conversation/message IDs where available, a deduplication cursor, and a consume ACK. A failed transition should terminate, not burn model quotas in an endless loop.
-5. For automatic Chat-side retrieval, connected tools and clear best-effort instructions. Prompt wording cannot force tool calls reliably.
+5. For Chat-side retrieval, a connected tool plus instructions that describe when to bootstrap, read recent context, and leave a checkpoint.
 
 ## Features and token budget
 
@@ -91,18 +91,18 @@ cp .env.example .env # insert a strong random token
 npm run demo:server
 ```
 
-Requires Node.js 22+. The demo is **loopback only and not production hardened**. See [Setup](docs/SETUP.md) before changing any hosts or enabling upload. The private production extension uses additional sources that are deliberately not redistributed.
+Requires Node.js 22+. The sample collector listens on loopback and defaults to preview mode. Follow [Setup](docs/SETUP.md) to connect your own environment; for remote access, add private HTTPS/VPN transport and appropriate authentication.
 
-## Limitations worth stating upfront
+## What we're still exploring
 
 - iOS ChatGPT conversation switching does **not** automatically switch the desktop tab; Shortcuts cannot supply a reliable Chat conversation ID or transcript.
 - You need a running browser (or manual reactivation). DOM and unofficial website APIs can change.
-- Bootstrap and continuity retrieval inside ordinary Chat are **best effort**, not a deterministic host hook. A brief manual reminder can be required.
-- A model does not acquire a trustworthy clock merely because a prompt tells it to print timestamps. Prefer host-supplied timestamps, and let the hook decide when enough time elapsed.
+- **Automatic return-time retrieval:** Our instructions invite a new or returning Chat session to read bootstrap and continuity. Whether the model calls the tools on its own varies; a gentle reminder often works well.
+- **Time-gap detection:** User instructions can ask the model to reread context after a long absence, but Chat does not necessarily provide a reliable timestamp for every message on the model side. If your setup already checks a reliable current time each turn, or supplies actual message timestamps, return-after-a-gap triggers may work more consistently. Printing a time label alone is different from having reliable time information.
 - Windows/Linux Chromium, other AI platforms and other messaging agents are **possible adaptations, not tested combinations**.
 
 ## Attribution and licensing
 
-Our early export/archive exploration referenced [OwlCt/ChatGPT-Export](https://github.com/OwlCt/ChatGPT-Export) and its upstream acknowledgements. Later browser-extension implementations were **studied**, not copied as a whole. See [Credits](CREDITS.md) and the included [MIT License](LICENSE). The generalized sample was rewritten without personal configuration, message content, secrets or original private memory implementations.
+Our early export/archive exploration referenced [OwlCt/ChatGPT-Export](https://github.com/OwlCt/ChatGPT-Export) and its upstream acknowledgements. We also studied several browser-extension implementations. See [Credits](CREDITS.md) and the included [MIT License](LICENSE). The general-purpose examples keep personal configuration, private messages and long-term memory data in their owners' environments.
 
 **Chinese:** [main branch](https://github.com/Elisekaiu/Cross-entry-continuity/tree/main) · **English:** [english branch](https://github.com/Elisekaiu/Cross-entry-continuity/tree/english)
