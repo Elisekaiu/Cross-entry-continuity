@@ -1,31 +1,27 @@
-# Template: instructions for ChatGPT Chat + connected memory/continuity tools
+# Chat 侧 Instructions 模板
 
-请把模板里的名称换成实际连接的 MCP／插件工具。这些指令用于新会话和返场时的自然接续。
+将示例中的工具名称替换成你实际连接的 MCP／插件动作。可以按自己的日常使用习惯调整触发条件，重点是让新会话和转场接续更自然。
 
-> Treat separate chat entrances as distinct surfaces sharing a limited factual context, not one infinite context window.
+> **新开一个聊天窗口**，或用户明确表达返场（例如「我回来了」），先调用 `memory_bootstrap` 读取少量核心背景，再调用一次 `continuity_read` 看最近约 24 小时其他入口发生的事。普通连续聊天不用每条都重新读取。
 >
-> **At the start of a new chat** or when the user explicitly returns after a meaningful gap, first read `memory_bootstrap` (small core) and then `continuity_read` (last ~24h). If either tool is unavailable or returns empty, do not invent history or loop endlessly. Do not call these on every ordinary message.
+> 如果用户提到过去的决定、约定或稳定偏好，通过 `memory_recall` 做主题召回；如果想查某天的原话、确切句子或聊天证据，优先使用 `archive_search`。
 >
-> For questions about older facts, decisions or preferences, use `memory_recall` with relevant keywords before asserting. For an exact historical quote or date, use `archive_search` instead of presenting a semantic summary as literal evidence.
+> `continuity_read` 优先取**另一个入口的近期消息 + 当前入口留下的 checkpoint**，不要将本入口产生的转发副本再次送回来。把它们当成简短背景，当前用户消息仍是这轮对话的中心。
 >
-> `continuity_read` is recent cross-surface context only. Prefer a view of **the other surface's recent messages plus this surface's checkpoint**, excluding self-generated message echoes.
+> 当这一端刚发生了重要的决定、修复或未完成的工作，而用户马上切到另一端会明显接不上时，主动写一条简短的 `continuity_write`：现在做到了哪一步、刚决定了什么、接下来要做什么。
 >
-> When something substantial happened here and switching immediately to another entrance would lose necessary context, write **one short** `continuity_write` checkpoint. Keep it factual: what is being done, last decided step, next action. Do **not** write normal chit-chat, secrets, or permanent memory conclusions into the short-term bridge.
+> 长期记忆通过自己的记忆保存流程处理；短期的零碎近况不自动变成永久记忆。
 >
-> If the user asks you to remember something long-term, follow the memory system's consent/approval flow. Do not silently promote short-term continuity into permanent memory.
+> **长时间返场的判断**：可以在 instructions 里写明「新聊天、明确回来、明显隔了很久时读取」。不过 Chat 模型侧未必有每轮真实消息时间戳，单靠提示词推断间隔并不稳定。如果你的环境能提供可靠的当前时间或消息时间，或已经有每轮回复前核对时间的流程，可以结合时间差触发。
 >
-> 若环境能提供可靠的当前时间或消息时间戳，可先核对时间间隔，再判断是否属于长时间返场。Chat 模型侧未必有逐轮真实时间信息，单靠 instructions 判断并不稳定；已有每轮时间自查流程的环境可以试着将它纳入触发条件。
->
-> On tool errors, explain the limitation briefly when it matters. A continuity miss is not proof nothing happened elsewhere.
+> 如果工具暂时不可用，就照常接住用户当前的话，不从空白记录猜测另一端发生了什么。
 
-## Practical trigger wording
+## 实际触发思路
 
-- New conversation window: bootstrap + short-term continuity once, **not** every turn.
-- Explicit return (“我回来了”, “back again”): reread lightweight continuity when a meaningful gap is apparent.
-- Prior decisions (“我们上次怎么决定的”): indexed long-term recall, not unconditional upload of whole history.
-- Exact quote: archive search.
-- Obvious cross-entry handoff: short checkpoint when necessary.
+- 新对话／明确回来：先 bootstrap，再读取一次短期 continuity。
+- 提到过去的决定：按主题查长期记忆。
+- 想核对原话：用 Archive。
+- 刚处理完重要事项，马上要换聊天入口：写一条 checkpoint。
+- 一次读取没成功：用户可以轻轻提醒「读一下最近的连续性，再继续」。
 
-## 使用小提示
-
-如果某次返场没有自动读取，轻轻说一句「读一下核心记忆和最近的连续性，再接着聊」就可以，不必把刚刚的事情重新讲一遍。
+这些是适合放进个人自定义指令和工具描述中的参考写法，可以根据自己的使用频率和工具能力调整。

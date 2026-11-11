@@ -6,7 +6,7 @@
 
 ## 后续技术调研与相似问题空间
 
-下列项目用于研究当前分支捕获、页面观察、DOM 消息 ID、扩展隔离与本地数据导出等问题。**列在这里并不代表本项目复制了它们的源代码**：
+下列项目用于研究当前分支捕获、页面观察、DOM 消息 ID、扩展隔离与本地数据导出等问题。这些项目分别提供了有用的参考：
 
 - [dialoguesai/chatgpt-shadow-extension](https://github.com/dialoguesai/chatgpt-shadow-extension) — Chrome MV3、本地存储、页面可见消息与消息身份边界（Apache-2.0）。
 - [jtsternberg/ChatGPT-Export](https://github.com/jtsternberg/ChatGPT-Export) — 当前会话 DOM 导出与稳定结构选择器。
@@ -24,4 +24,4 @@
 
 ## 本项目
 
-Concept and reference implementation assembled collaboratively by an independent developer and AI-assisted coding tools (including OpenAI Codex on the private system). Git commit trailers identify AI assistance; they do not imply endorsement or an official OpenAI contribution. See [MIT LICENSE](LICENSE). No private chat transcript, user data, secrets or proprietary connected-app content is included.
+Concept and reference implementation assembled collaboratively by an independent developer and AI-assisted coding tools (including OpenAI Codex on the private system). Git 提交的 co-author 字段记录 AI 协作情况 or an official OpenAI contribution. See [MIT LICENSE](LICENSE). No private chat transcript, user data, secrets or proprietary connected-app content is included.

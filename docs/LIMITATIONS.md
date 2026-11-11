@@ -3,7 +3,7 @@
 | 情况 | 结论 | 怎么处理 |
 | --- | --- | --- |
 | iOS 原生 ChatGPT App + Shortcuts | **已在真实架构使用** App 开关信号 | 只上报状态，不上传正文 |
-| MacBook + Chrome + ChatGPT 网页登录 | **已实际使用** | 保持正确 Chat 页面打开；不保证从 iOS 自动切窗 |
+| MacBook + Chrome + ChatGPT 网页登录 | **已实际使用** | 保持目标 Chat 页面打开；iOS 换窗不会自动切换电脑标签 |
 | Linux VPS + Node.js + 另一 Agent 的 Hook | **已实际使用** | 限制等待、按需拉取，成功 ACK、失败放弃 |
 | 反向读取 Codex rollout JSONL | **已实际使用** | 非模型增量导出、游标、幂等；依赖日志格式 |
 | Windows / Linux 桌面 Chrome | **理论可能，未实际验收** | 检查常驻浏览器、登录态、权限及后台脚本生命周期 |

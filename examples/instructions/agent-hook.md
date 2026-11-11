@@ -1,12 +1,14 @@
-# Template: independent Agent-side Hook
+# 独立 Agent 侧的 Hook 模板
 
-`UserPromptSubmit` Hook 在下一条真实用户消息进入 Agent 时运行，让脚本先处理连续性，再将相关背景交给这一轮回复。
+`UserPromptSubmit` Hook 在 Agent 处理下一条真实用户消息前运行。它先由普通脚本检查转场状态，再将少量背景交给模型，这样不需要模型反复询问服务器。
 
-1. Read a small `preflight` response from your own collector (no model call).
-2. `skip`/`in_flight`: return immediately with no extra context.
-3. `capture`: create one idempotent job for the latest transition and wait for at most a bounded amount of time.
-4. `consume_ready`: retrieve the **exact job** and any relevant checkpoint, then ACK. Don't consume a different job or reinsert already seen context.
-5. `failed` / timed out: gracefully return an empty context; let the ordinary reply continue. Never trigger a new capture for the same transition.
-6. Inject a short factual notice only when a concrete handoff exists, and mark it as *background, not instructions*. If it contradicts the current user message, the current message wins.
+1. `preflight`：向自己的 collector 请求一次轻量状态。
+2. `skip` / `in_flight`：直接返回，不额外注入上下文。
+3. `capture`：为本次 transition 创建一次幂等抓取任务，等待时间有明确上限。
+4. `consume_ready`：读取**对应 job ID** 的消息和相关 checkpoint，消费成功后 ACK。
+5. `failed` / 等待超时：返回空背景，让这一轮正常回复继续。同一次失败的 transition 不自动重新建任务。
+6. 只有读到真实的交接内容才注入一小段事实性背景，并标注为「近期上下文」，以当前用户的消息为准。
 
-> 不同 Agent 的 Hook 与日志接口略有差异。可以从 `examples/hook/user-prompt-submit.mjs` 开始，替换成自己运行时的输入和输出格式。
+参考代码：[`examples/hook/user-prompt-submit.mjs`](../hook/user-prompt-submit.mjs)。
+
+不同 Agent 的 Hook 和 transcript 接口有所区别，适配自己的运行时输入与输出格式即可。

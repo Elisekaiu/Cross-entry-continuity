@@ -51,7 +51,7 @@ printf '{"prompt":"你好","session_id":"demo"}\n' | node examples/hook/user-pro
 
 ## 4. 反向：Agent → Chat
 
-将 `examples/wechat-export/export-visible.mjs` 的输入指向**你有权访问的** Agent 可见 JSONL 日志。该脚本只读增量并写短期消息；真实 Codex rollout 的复杂 `response_item` / 内部事件过滤需要按版本自行适配，绝不把系统指令和工具输出当成用户聊天。初次运行默认建立基准游标，不补发整个历史，后续只推新内容。
+将 `examples/wechat-export/export-visible.mjs` 的输入指向**你有权访问的** Agent 可见 JSONL 日志。该脚本只读增量并写短期消息；实际 Codex rollout 包含 `response_item` 等内部结构，适配时需过滤系统指令、工具输出和内部事件，只推送可见的用户与助手最终消息。初次运行默认建立基准游标，不补发整个历史，后续只推新内容。
 
 官端需接入一个有权限读取 `continuity/latest?source=agent` 的 MCP/插件工具，再在 `examples/instructions/official-chat.md` 基础上按自己的工具名配置。这个读取工具可以通过 Chat 侧连接的 MCP／插件提供，名称按自己的实现调整。
 
