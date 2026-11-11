@@ -1,6 +1,6 @@
-# Setup — 开源参考实现
+# 从本地体验开始
 
-这是**本机安全演示**，不是一键部署私人生产系统。
+可以先在自己的电脑上跑通最小流程，再按需要接上手机信号和另一个聊天入口。
 
 ## 要准备什么
 
@@ -28,7 +28,7 @@ npm run demo:server
 4. 打开或刷新 `https://chatgpt.com/c/<conversation-id>` 对话页，再点扩展 popup 的 **Capture preview**；它不会发送任何内容
 5. 在本机独立演示环境里有真实 collector 才将 `enabled` 调成 `true`，然后重新加载扩展
 
-**注意：** 演示扩展走 DOM-only 当前对话，不拥有 iOS conversation ID、不读取 ChatGPT cookie，也不检索账户全部历史。无 `/c/<id>` 或读取不到可见消息，就显示无法抓取。严格避免把输出发到不属于自己的端点。
+扩展只读取当前网页中可见的消息节点，不使用 ChatGPT cookie 或账号历史接口。遇到没有 `/c/<id>`、无法识别消息的页面，会显示抓取失败。上传地址由使用者自行配置。
 
 ## 3. 模拟 App 开关信号和 Agent Hook
 
@@ -47,13 +47,13 @@ curl -sS -X POST http://127.0.0.1:8794/surface -H 'Content-Type: application/jso
 printf '{"prompt":"你好","session_id":"demo"}\n' | node examples/hook/user-prompt-submit.mjs
 ```
 
-需要给它 `CONTINUITY_URL=http://127.0.0.1:8794` 和 `CONTINUITY_TOKEN`。示例 Hook 输出符合一种 Codex `UserPromptSubmit` additionalContext 的常见结构；其他运行时应自行调整，不保证通用可直接使用。
+需要给它 `CONTINUITY_URL=http://127.0.0.1:8794` 和 `CONTINUITY_TOKEN`。示例 Hook 使用 Codex `UserPromptSubmit` 的 `additionalContext` 结构。其他 Agent 可以把相同的预检、领取和消费逻辑接到自己的消息前处理入口。
 
 ## 4. 反向：Agent → Chat
 
 将 `examples/wechat-export/export-visible.mjs` 的输入指向**你有权访问的** Agent 可见 JSONL 日志。该脚本只读增量并写短期消息；真实 Codex rollout 的复杂 `response_item` / 内部事件过滤需要按版本自行适配，绝不把系统指令和工具输出当成用户聊天。初次运行默认建立基准游标，不补发整个历史，后续只推新内容。
 
-官端需接入一个有权限读取 `continuity/latest?source=agent` 的 MCP/插件工具，再在 `examples/instructions/official-chat.md` 基础上按自己的工具名配置。README 不会假装这个工具由 ChatGPT 默认提供。
+官端需接入一个有权限读取 `continuity/latest?source=agent` 的 MCP/插件工具，再在 `examples/instructions/official-chat.md` 基础上按自己的工具名配置。这个读取工具可以通过 Chat 侧连接的 MCP／插件提供，名称按自己的实现调整。
 
 ## 5. 测试
 
@@ -62,4 +62,4 @@ npm test
 npm run privacy:scan
 ```
 
-示例包含状态机测试、纯文本增量提取测试与脱敏检查。它们不能代替真实 iOS → Chrome → Hook 的人工验收。
+示例包含状态机、文本增量提取与脱敏测试。接入手机和另一个聊天入口后，可以做一次实际转场来核对整条链路。

@@ -1,6 +1,6 @@
 # Template: instructions for ChatGPT Chat + connected memory/continuity tools
 
-Replace **every** tool label with your own actual plugin/MCP action name. These instructions do not create tools or guarantee calls.
+请把模板里的名称换成实际连接的 MCP／插件工具。这些指令用于新会话和返场时的自然接续。
 
 > Treat separate chat entrances as distinct surfaces sharing a limited factual context, not one infinite context window.
 >
@@ -14,7 +14,7 @@ Replace **every** tool label with your own actual plugin/MCP action name. These 
 >
 > If the user asks you to remember something long-term, follow the memory system's consent/approval flow. Do not silently promote short-term continuity into permanent memory.
 >
-> Use trusted timestamps **only when supplied by the host or tool**. Do not assume that the model can derive an accurate per-message elapsed time from instructions alone.
+> 若环境能提供可靠的当前时间或消息时间戳，可先核对时间间隔，再判断是否属于长时间返场。Chat 模型侧未必有逐轮真实时间信息，单靠 instructions 判断并不稳定；已有每轮时间自查流程的环境可以试着将它纳入触发条件。
 >
 > On tool errors, explain the limitation briefly when it matters. A continuity miss is not proof nothing happened elsewhere.
 
@@ -26,6 +26,6 @@ Replace **every** tool label with your own actual plugin/MCP action name. These 
 - Exact quote: archive search.
 - Obvious cross-entry handoff: short checkpoint when necessary.
 
-## Caveat
+## 使用小提示
 
-This is an instruction template, **not** a product feature or deterministic webhook. If bootstrapping fails to trigger, a one-line user reminder such as “Read bootstrap and recent continuity before continuing” may still be needed.
+如果某次返场没有自动读取，轻轻说一句「读一下核心记忆和最近的连续性，再接着聊」就可以，不必把刚刚的事情重新讲一遍。
