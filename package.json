@@ -1,0 +1,12 @@
+{
+  "name": "cross-entry-continuity-reference",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {"node": ">=22"},
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "demo:server": "node examples/collector/server.mjs",
+    "privacy:scan": "node scripts/privacy-scan.mjs"
+  }
+}
