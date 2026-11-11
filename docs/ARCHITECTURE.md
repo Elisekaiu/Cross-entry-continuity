@@ -93,3 +93,8 @@ Shortcut 的作用是 `app opened / closed` **surface event**；它不读取 Cha
 ## E. 网页采集的维护
 
 ChatGPT 的 DOM 和网页接口可能随版本变化。仓库扩展使用 DOM-only 采集，便于理解和调整。如果要适配其他消息来源，还需要核对登录状态、网页结构、当前会话身份与数据权限。
+
+
+## F. 更细的协议说明
+
+状态机、ACK 后提交消息游标、`no_delta`/`failed` 区分、同文不同 message ID、反向日志 byte cursor 等实现细节单独整理在 [PROTOCOL.md](PROTOCOL.md)。

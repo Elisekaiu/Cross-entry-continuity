@@ -6,7 +6,7 @@
 
 > 这里记录了我们实际使用的双向接续方案，也整理了可以自行运行和改造的参考代码。可以从最小示例开始，再根据自己的聊天平台接入对应接口。
 
-[扩展代码分享取舍](docs/EXTENSION.md) · [完整链路](docs/ARCHITECTURE.md) · [部署与环境](docs/SETUP.md) · [安全和隐私](SECURITY.md) · [致谢](CREDITS.md) · [实际验证与限制](docs/LIMITATIONS.md)
+[完整链路](docs/ARCHITECTURE.md) · [协议与状态机](docs/PROTOCOL.md) · [我们在用的 Instructions](docs/INSTRUCTIONS.md) · [扩展实现](docs/EXTENSION.md) · [部署与环境](docs/SETUP.md) · [安全和隐私](SECURITY.md) · [致谢](CREDITS.md)
 
 ## 不只适用于 ChatGPT，也写给长期陪伴的 AI 使用者
 
