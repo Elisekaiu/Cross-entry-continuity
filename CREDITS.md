@@ -6,7 +6,7 @@
 
 ## Other public projects studied
 
-These were researched or compared for page structure, visible-message detection, MV3 extension isolation and browser export. These links record the projects we studied while developing the extension.
+These projects helped us explore page structure, visible-message detection, MV3 extension design and browser export:
 
 - [dialoguesai/chatgpt-shadow-extension](https://github.com/dialoguesai/chatgpt-shadow-extension)
 - [jtsternberg/ChatGPT-Export](https://github.com/jtsternberg/ChatGPT-Export)
@@ -20,8 +20,8 @@ When building on upstream code, follow its license and attribution requirements.
 - [ChatGPT Scheduled Tasks](https://help.openai.com/en/articles/10291617-scheduled-tasks-in-chatgpt)
 - [ChatGPT Work and Codex](https://help.openai.com/en/articles/20001275-chatgpt-work-and-codex)
 
-These links clarify the difference between supported external app event-triggered tasks and ordinary Chat message webhooks. They help explain the available event-trigger and Chat integration mechanisms.
+These resources explain how scheduled and external-event tasks differ from per-message Chat handoff.
 
 ## Project authorship
 
-The architecture and reference are a collaboration of an independent developer and AI-assisted tooling, including OpenAI Codex work on the private system. Git co-author attribution discloses assistance, a record of AI-assisted development. No private conversation, account data or memory records are shared here. New reference source uses the included [MIT License](LICENSE).
+The architecture and reference are a collaboration of an independent developer and AI-assisted tooling, including OpenAI Codex work on the private system. Git co-author attribution records this AI-assisted collaboration. The public examples contain no private conversations, accounts or personal memory records. New reference source uses the included [MIT License](LICENSE).
