@@ -1,6 +1,6 @@
 # Adapting to another AI chat service without a message webhook
 
-The underlying design can work across long-running personal assistants, human–AI companionship, creative workflows and separate Agent threads. Each platform brings its own available tools and ways to read messages.
+The underlying design is about **recent context handoff, not merging chat histories**. It can work across long-running personal assistants, human–AI companionship, creative workflows and separate Agent threads. Each platform brings its own available tools and ways to read messages.
 
 | Feature available | What you can build | If absent |
 | --- | --- | --- |

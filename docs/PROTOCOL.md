@@ -182,7 +182,7 @@ user sends a message
 -> model answers normally
 ```
 
-This keeps idle token use near zero and lets normal replies continue when synchronization is unavailable.
+This keeps idle token use near zero and lets normal replies continue when the context handoff is unavailable.
 
 The public hook waits up to 8 seconds for demonstration purposes. The important design point is the bounded wait, not the exact number.
 

@@ -9,7 +9,7 @@ The desired event is **every new message/reply in an ordinary Chat → a private
 
 ## 2. Why not move everything to Work?
 
-The primary long-running conversation remains in Chat, and a separate Agent runs in parallel. Moving the entire relationship/workflow to a different product mode would change the user experience. Repeated scheduled or event-triggered tasks have limits, latency and different context semantics; they are not a free unlimited stream of normal Chat messages. That is why we keep ordinary Chat for our main conversation and let small scripts take care of the handoff.
+The primary long-running conversation remains in Chat, and a separate Agent runs in parallel. Moving the entire relationship/workflow to a different product mode would change the user experience. Repeated scheduled or event-triggered tasks have limits, latency and different context semantics; they are not a free unlimited stream of normal Chat messages. That is why we keep ordinary Chat for our main conversation and let small scripts handle the **context handoff** between independent threads.
 
 ## 3. Why not summarize each message with an LLM?
 

@@ -8,6 +8,11 @@ Possibly. The underlying requirement is a long-running desktop Chromium environm
 
 No general supported route is known. App-close/open automation is a *surface event*, not a native Chat transcript export.
 
+
+**Do Agent / messaging-app replies automatically appear in the original ChatGPT conversation?**
+
+No. The native chat histories stay separate. New Agent-side messages are written as short-lived Continuity events; Chat can read that context through a connected tool and then respond naturally in its **next own turn**. Those messages are not inserted into ChatGPT's existing bubble history. The reverse direction works the same way: Chat messages can become bounded recent context for the Agent, but they are not replayed as a mirrored transcript.
+
 **Why not have the model summarize every turn?**
 
 You can, but it adds model calls, latency, token use and potential paraphrase errors. Our design uses ordinary code for cursors, clipping, deduplication and transport, reserving model context for a short factual handoff when actually needed.

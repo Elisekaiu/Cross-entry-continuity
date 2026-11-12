@@ -1,6 +1,8 @@
 # Architecture and handoff sequence
 
-This page follows the two directions of our working handoff flow. Runnable simplified examples live in `examples/`.
+This page follows the **two directions of context handoff** in our working setup. Runnable simplified examples live in `examples/`.
+
+Here, “two directions” means that either entrance can place a small amount of recent context into the Continuity store for the other side to read. It does **not** mean that two products share one transcript or write messages into each other's native chat history.
 
 ## A. Chat → independent Agent
 
@@ -49,7 +51,7 @@ An uploaded batch can wait for a later prompt to consume it. A failed handoff en
 - A job ID, revision, ACK and consumed cursor. Keep the cursor until the downstream consumer has confirmed it.
 - A failed terminal job must not create another job for the same revision.
 
-## B. Independent Agent → Chat
+## B. Independent Agent → Continuity that Chat can read
 
 ```mermaid
 sequenceDiagram
@@ -68,7 +70,7 @@ sequenceDiagram
 
 The actual Codex runtime writes rollout JSONL; an independent script holds per-file byte offsets, sends visible text and timestamps with idempotency keys, and never asks a model to summarize each turn. A separate archive can preserve exact original text much longer than the short-term continuity TTL.
 
-A source-filtered read avoids feeding a Chat-produced shadow batch back into the same Chat. Without it, context can bounce between entrances repeatedly.
+A source-filtered read avoids feeding a Chat-produced shadow batch back into the same Chat. Without it, a context handoff can accidentally turn into repeated transcript copying.
 
 ## C. Memory is not continuity
 

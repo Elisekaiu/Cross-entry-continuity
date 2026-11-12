@@ -3,6 +3,8 @@
 **English branch `english`** · [中文版 main / Full Chinese edition](https://github.com/Elisekaiu/Cross-entry-continuity/tree/main)
 
 > **A small bridge for conversations that happen in different places.** Keep each chat thread independent, while sharing a little recent context whenever it helps the conversation flow.
+>
+> **One important boundary: this is not transcript synchronization or chat-history mirroring.** Each surface keeps its own native history. The bridge carries only small pieces of recent context, checkpoints and retrievable memory; the other side reads them on demand through a hook or tool. Agent / messaging-app replies do not automatically appear as message bubbles inside the original ChatGPT thread, and vice versa.
 
 [Architecture](docs/ARCHITECTURE.md) · [Protocol & state machine](docs/PROTOCOL.md) · [Instructions we use](docs/INSTRUCTIONS.md) · [Setup](docs/SETUP.md) · [Other AI platforms](docs/ADAPTERS.md) · [Safety](SECURITY.md) · [Credits](CREDITS.md)
 
@@ -72,7 +74,7 @@ Shortcuts carries app open/close signals. The extension reads the conversation *
 - Current private production budget: at most **4 messages / ~600 Unicode characters** per handoff; open sample is configurable and demonstrates ID-based deduplication.
 - One-shot transitions, bounded waits, job-specific ACK, fail-closed conversation checks and a clear `no_delta` vs `failed` distinction.
 - A separate short checkpoint can preserve critical current progress if the extension fails.
-- Reverse sync tails the other Agent's visible JSONL transcript in ordinary code—no repeated summary-model calls.
+- The reverse handoff tails the other Agent's visible JSONL transcript in ordinary code—no repeated summary-model calls.
 - For a deeper explanation of revisions, ACK timing, pending cursors, terminal failures and reverse byte cursors, see [Protocol & state machine](docs/PROTOCOL.md). For the generalized prompt rules we actually use, see [Instructions](docs/INSTRUCTIONS.md).
 
 ## Runnable minimal reference

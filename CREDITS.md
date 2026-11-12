@@ -20,7 +20,7 @@ When building on upstream code, follow its license and attribution requirements.
 - [ChatGPT Scheduled Tasks](https://help.openai.com/en/articles/10291617-scheduled-tasks-in-chatgpt)
 - [ChatGPT Work and Codex](https://help.openai.com/en/articles/20001275-chatgpt-work-and-codex)
 
-These resources explain how scheduled and external-event tasks differ from per-message Chat handoff.
+These resources explain how scheduled and external-event tasks differ from ordinary Chat per-message notification / context-handoff needs.
 
 ## Project authorship
 
