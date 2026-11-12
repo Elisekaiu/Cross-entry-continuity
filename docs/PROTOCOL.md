@@ -156,7 +156,7 @@ Agent 的下一条真实消息会再次经过 Hook。如果 failed revision 仍�
 - Hook 反复等待；
 - 浏览器重复抓取；
 - 同一错误一直出现；
-- 更差的情况下，模型入口每次回复都被同步流程拖慢。
+- 更差的情况下，模型入口每次回复都被交接流程拖慢。
 
 所以我们把 failed 当成一次转场的终态：
 
@@ -205,7 +205,7 @@ user sends next message
 
 - 没有转场时几乎没有上下文成本；
 - 不需要后台模型一直醒着；
-- 同步失败时普通回复仍然可以继续；
+- 交接失败时普通回复仍然可以继续；
 - 用户真正回来聊天时，背景才进入模型。
 
 参考 Hook 的等待时间是 8 秒，生产环境可以按体验调整，但重点是**有明确上限**。
@@ -283,7 +283,7 @@ sha256(role + "\0" + text)
 - **fingerprint fallback**：处理部分页面 ID 漂移。
 - **pending seen + consume ACK**：避免上传成功但消费失败后丢消息。
 - **bounded payload**：控制 token 和上下文。
-- **bounded wait**：同步不阻塞普通回复。
+- **bounded wait**：上下文交接不阻塞普通回复。
 - **terminal failure**：同一转场不反复重建。
 - **no_delta != failed**：诊断清晰。
 - **checkpoint fallback**：网页采集失效时仍有最小语义背景。

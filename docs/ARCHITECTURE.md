@@ -1,6 +1,8 @@
 # 架构与时序
 
-这页将我们实际使用的双向交接过程整理成时序图。对应的简化源码位于 `examples/`。
+这页将我们实际使用的**两个方向的上下文交接**整理成时序图。对应的简化源码位于 `examples/`。
+
+这里的「双向」指的是：**两个入口都可以把少量近期上下文送进短期 Continuity，再由另一端按需读取**。它不是把 A 端聊天记录复制进 B 端，也不会把 B 端回复写回 A 端原生聊天历史。
 
 ## A. 官端 Chat → 另一个 Agent 入口
 
@@ -52,7 +54,7 @@ sequenceDiagram
 - 本地缓存、时间窗口、capture job ID / transition revision、ACK 后提交消费游标。
 - 失败后终态跳过这一轮，下一次真实会话活动产生新 revision。
 
-## B. 另一个 Agent → 官端 Chat
+## B. 另一个 Agent → 官端可读取的 Continuity
 
 ```mermaid
 sequenceDiagram
@@ -74,7 +76,7 @@ sequenceDiagram
 
 实际系统的 Agent 是长期运行的 Codex，会把可见消息落在本地 rollout JSONL。读档脚本根据文件偏移维护 `continuity_cursors`，通过服务器 API 发送短期事件（含角色、时间、来源和幂等键）。它与长周期逐字归档共享部分读取路径，但目的不同：**归档可以多年保留，continuity 只承担短期接续**。
 
-实际读取工具还有一个防回音规则：普通官端读取默认优先取来自另一个入口的消息及本入口 checkpoint，**不把官端的原文 shadow batch 再喂回官端**。否则会无意义自我重复。
+实际读取工具还有一个防回音规则：官端读取默认优先取来自另一个入口的消息及本入口 checkpoint，**不把官端自己送出去的 shadow batch 再读回来**。否则会把「上下文交接」误变成来回复制聊天记录。
 
 ## C. 长期记忆不等于跨端增量
 

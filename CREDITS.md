@@ -22,7 +22,7 @@
 - [ChatGPT Scheduled Tasks](https://help.openai.com/en/articles/10291617-scheduled-tasks-in-chatgpt)
 - [ChatGPT Work and Codex](https://help.openai.com/en/articles/20001275-chatgpt-work-and-codex)
 
-这两篇资料有助于了解 Work 的定时／外部事件触发，与普通 Chat 逐消息同步需求之间的区别。
+这两篇资料有助于了解 Work 的定时／外部事件触发，与普通 Chat 的逐消息通知／上下文交接需求之间的区别。
 
 ## 关于协作
 
